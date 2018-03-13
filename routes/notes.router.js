@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-
+const knex = require('../knex');
 // Create an router instance (aka "mini-app")
 const router = express.Router();
 
@@ -23,6 +23,17 @@ router.get('/notes', (req, res, next) => {
     })
     .catch(err => next(err)); 
   */
+  knex.select('id', 'title', 'content')
+    .from('notes')
+    .where(function() {
+      if (searchTerm) {
+        this.where('title', 'like', `%${searchTerm}%`);
+      }
+    })
+    .then(list => {
+      res.json(list);
+    })
+    .catch(err => next(err));
 });
 
 /* ========== GET/READ SINGLE NOTES ========== */

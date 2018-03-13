@@ -1,9 +1,10 @@
 'use strict';
-
+//database configuration file unique to Knex
+//contains development and production
 module.exports = {
   development: {
     client: 'pg',
-    connection: process.env.DATABASE_URL || 'postgres://localhost/noteful-app',
+    connection: process.env.DATABASE_URL || 'postgres://localhost/noteful-app-v2',
     debug: true, // http://knexjs.org/#Installation-debug
     pool: {min : 1 , max : 2}
   },
