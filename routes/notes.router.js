@@ -84,8 +84,21 @@ router.put('/notes/:id', (req, res, next) => {
     return next(err);
   }
 
+  knex.select()
+    .from('notes')
+    .where(function() {
+      if (noteId) {
+        this.where('id', noteId);
+      } else {
+        next();
+      }
+    })
+    .update(updateObj)
+    .then(item => 
+      res.join(item))
+    .catch(err => next(err));
  
-  /*
+  /*`
   notes.update(noteId, updateObj)
     .then(item => {
       if (item) {
