@@ -84,6 +84,7 @@ router.put('/notes/:id', (req, res, next) => {
     return next(err);
   }
 
+ 
   /*
   notes.update(noteId, updateObj)
     .then(item => {
